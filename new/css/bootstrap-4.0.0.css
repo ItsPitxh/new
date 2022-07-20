@@ -4474,8 +4474,18 @@ tbody.collapse.show {
   margin-bottom: 0;
 }
 
+.card-text{
+    display: -webkit-box;
+    max-width: max-content;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+} 
+
 .card-text:last-child {
   margin-bottom: 0;
+
+
 }
 
 .card-link:hover {

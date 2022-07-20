@@ -1,13 +1,16 @@
 <?php
-  session_start();
   include("fn.php");
   
-  if(!isset($_REQUEST['user'])) {
-    header("location:index.php");
+  $user_id = $_REQUEST['user'];
+  $sql = "SELECT * FROM user_tb WHERE user_id = '$user_id'";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+  if($result->num_rows == 0) {
+    header('location:index.php');
     exit();
   }
 
-  $user_id = $_REQUEST['user'];
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,11 +23,8 @@
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
   </head>
   <body>
-    <?php
+  <?php
       include("nav.php");
-      $sql = "SELECT * FROM user_tb WHERE user_id = '$user_id'";
-      $result = $conn->query($sql);
-      $row = $result->fetch_assoc();
     ?>
     <div class="container mt-3">
       <div class="row d-flex justify-content-start align-items-end h-100">
@@ -32,33 +32,32 @@
           <div class="pfp-div rounded" style="background-image: url('images/<?=$row['user_pfp']?>');"></div>
           
         </div>
-        <div class="col-6 col-md-3 px-0">
+        <div class="col-6 col-md-9 px-0">
             <div class="">
                 <h1 class="mb-0"><?=$row['user_fname']?> <?=$row['user_lname']?></h1>
                 <h6 class="mb-0"><?=$row['user_status']?></h6>
             </div>
             <?php
             if(!empty($_SESSION['user_id'])) {
-              if($_SESSION['user_status'] != 'user') {
-                
+              if($_SESSION['user_status'] == 'user') {
               ?>
                 <a class="btn btn-success mx-0 float-right" data-toggle="modal" data-target="#add-prod-modal"><span class="my-auto">Add Product +</span></a>
               <?php
-            } else {
+            } else if ($_SESSION['user_status'] == 'pending') {
+              ?>
+                <div class="float-right">
+                  <a class="btn btn-success" data-toggle="modal" data-target="#add-prod-modal"><span class="my-auto">Add Product ➕</span></a>
+                  <a class="btn btn-primary" data-toggle="modal" data-target="#regis-store-modal"><span class="my-auto text-white">Confirm Orders ✔</span></a>
+                </div>
+
+              <?php
+            } else{
               ?>
                 <a class="btn btn-primary mx-0 float-right" data-toggle="modal" data-target="#regis-store-modal"><span class="my-auto text-white">Become A Seller</span></a>
               <?php
-            }}
+            }
+          }
           ?>
-        </div>
-        <div class="col-12 col-md-6 px-0 ml-auto">
-          
-
-            
-          
-              
-
-            
         </div>
       </div>
 
@@ -69,7 +68,20 @@
     <div class="container">
       <div class="row text-center">
             <?php
-                include("product.php");
+                $sql = "SELECT * FROM prod_tb WHERE user_id = '$user_id'";
+                $result = $conn->query($sql);
+                if($result->num_rows > 1) {
+                  while($row = $result->fetch_assoc()) {
+                    include("product.php");
+                  }
+                } else {
+                  ?>
+                    <h3 class="text-center">Oops, There no products yet.</h3>
+                  <?php
+                }
+                
+                
+
             ?>
       </div>
     </div>
@@ -144,5 +156,7 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap-4.0.0.js"></script>
     <script src="js/app.js"></script>
+    <script>
+    </script>
   </body>
 </html>

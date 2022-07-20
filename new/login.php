@@ -31,6 +31,13 @@
 						<div class="col px-0">
 							<label for="password">Password</label>
 							<input type="password" name='password' class="w-100 form-control" />
+							<?php
+								if(isset($_REQUEST['err'])) {
+									?>
+										<p class="text-danger text-right m-0 p-0">User not found : Your username and password may not corrected</p>
+									<?php
+								}
+							?>
 						</div>  
 					</div>
 					<div class="row mx-0 py-3">

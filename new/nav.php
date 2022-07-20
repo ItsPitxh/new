@@ -18,7 +18,13 @@
 			</li>
         </ul>         
             <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"><button type="submit" hidden=""></button>
+              <div class="input-group">
+                <input class="form-control" type="search" placeholder="Search For Products" aria-label="Search">
+                <div class="input-group-append">
+                  <input type="submit" type="submit" value="🔍" class="btn btn-success">
+                </div>
+                  
+              </div>
             <?php
               if(empty($_SESSION['user_id'])) {
                 ?>
@@ -29,11 +35,11 @@
                         <a class="dropdown-item " href="register.php">Register</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item " href="login.php">Log In</a>
-                    </form>
-                          
-                          
                       </div>
+                    </form>
                   </div>
+                          
+                          
                 <?php
               } else {
                 if($_SESSION['user_status'] == "user" XOR $_SESSION['user_status'] == 'store') {
@@ -42,9 +48,9 @@
                       <form action="" method="post">
                           <a class="nav-link dropdown-toggle text-white btn-dark rounded" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item " href="user.php?user=<?=$_SESSION['user_id']?>">user</a>
+                          <a class="dropdown-item " href="user.php?user=<?=$_SESSION['user_id']?>">User</a>
                           <div class="dropdown-divider"></div>
-                          <a class='dropdown-item' data-toggle='modal' data-target='#logout-modal'>Logout</a>
+                          <a class='dropdown-item' data-toggle='modal' data-target='#logout-modal'>Log Out</a>
                       </form>
                             
                             
@@ -58,9 +64,9 @@
                       
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item " href="user.php?user=<?=$_SESSION['user_id']?>">user</a>
+                            <a class="dropdown-item " href="user.php?user=<?=$_SESSION['user_id']?>">User</a>
                             <div class="dropdown-divider"></div>
-                            <a class='dropdown-item' data-toggle='modal' data-target='#logout-modal'>Logout</a>
+                            <a class='dropdown-item' data-toggle='modal' data-target='#logout-modal'>Log Out</a>
       
 
 

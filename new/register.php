@@ -35,6 +35,7 @@
 							<div class="col px-0">
 								<label for="username">Username</label>
 								<input type="text" name="username" class="w-100 form-control"  required/>
+								<?php if(isset($_REQUEST['err'])){ ?><p class="text-danger text-right m-0 p-0">Error : This username's already been used</p><?php } ?>
 							</div>  
 						</div>
 						<div class="row mx-0">

@@ -1,6 +1,6 @@
 <?php 
-  session_start();
   include("fn.php");
+  // session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home | PLC</title>
     <!-- Bootstrap -->
+   
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
   </head>
   <body>
@@ -68,7 +69,7 @@
     <div class="container">
       <div class="form-inline">
         <form action="" method="post">
-          <select name="" class="form-control w-25 ml-auto" id="">
+          <select name="" class="form-control w-25 ml-auto">
             <option value="">Sort By...</option>
             <option value="">Name A-Z</option>
             <option value="">Price Low-High</option>
@@ -79,7 +80,11 @@
       </div>
       <div class="row text-center">
               <?php
-                include("product.php");
+                $sql = "SELECT * FROM prod_tb";
+                $result = $conn->query($sql);
+                while($row = $result->num_rows){
+                  include("product.php");
+                }
               ?>
       </div>
     </div>
@@ -143,9 +148,7 @@
     </footer>
 
     <?php 
-      include("modals.php")
-  
-
+      include("modals.php");
     ?>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-3.2.1.min.js"></script>
@@ -154,10 +157,7 @@
     <script src="js/bootstrap-4.0.0.js"></script>
     <script src="js/app.js"></script>
     <script>
-      $(window).on("load", function(){
-        $("form")[0].reset()
-
-      })
+     
     </script>
   </body>
 </html>
