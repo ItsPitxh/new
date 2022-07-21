@@ -1,4 +1,3 @@
-
 <!-- prod modal -->
 <div class="modal collapse" id="prod-modal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -96,7 +95,7 @@
 
 <!-- add product modal -->
 <div class="modal" id="add-prod-modal">
-  <form method="post" enctype='multipart/form-data' class="form-modal">
+  <form action='dbugfn.php' method="post" enctype='multipart/form-data' class="form-modal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -116,12 +115,12 @@
             </div>
             <div class="col-6 pr-0">
                 <label for="prod-price" class="d-block">Product's Category</label>
-                <select name="" id="" class="form-control">
-                    <option value="Vegs">Vegetables</option>
-                    <option value="Fruits">Fruits</option>
-                    <option value="Chemicals">Chemicals</option>
-                    <option value="Tools">Tools</option>
-                    <option value="Agricultural-Vehicles">Agricultural-Vehicles</option>
+                <select name="prod-cat" id="" class="form-control">
+                    <option value="1">Vegetables</option>
+                    <option value="2">Fruits</option>
+                    <option value="3">Chemicals</option>
+                    <option value="4">Tools</option>
+                    <option value="5">Agricultural-Vehicles</option>
                     <option value="Others">Others...</option>
                     
                 </select>
@@ -158,7 +157,8 @@
                 </div>
         </div>
         <div class="modal-footer">
-          <input type="submit" name='add-prod-submit' class="btn btn-success" value="Submit Product">
+          <input type="submit" name='' class="btn btn-success" value="Submit Product">
+          <!-- <input type="submit" name='add-prod-submit' class="btn btn-success" value="Submit Product"> -->
         </div>
       </div>
     </div>
