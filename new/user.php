@@ -41,7 +41,9 @@
             if(!empty($_SESSION['user_id'])) {
               if($_SESSION['user_status'] == 'user') {
               ?>
-                <a class="btn btn-success mx-0 float-right" data-toggle="modal" data-target="#add-prod-modal"><span class="my-auto">Add Product +</span></a>
+                <div class="float-right">
+                  <a class="btn btn-primary" data-toggle="modal" data-target="#regis-store-modal"><span class="my-auto text-white">Become A Seller 🏪</span></a>
+                </div>
               <?php
             } else if ($_SESSION['user_status'] == 'pending') {
               ?>
@@ -67,22 +69,13 @@
     <hr>
     <div class="container">
       <div class="row text-center">
-            <?php
-                $sql = "SELECT * FROM prod_tb WHERE user_id = '$user_id'";
+              <?php
+                $sql = "SELECT * FROM prod_tb INNER JOIN user_tb ON prod_tb.user_id = user_tb.user_id INNER JOIN prod_img_tb ON prod_tb.prod_id = prod_img_tb.prod_id WHERE prod_tb.user_id = '$user_id' GROUP BY prod_tb.prod_id";
                 $result = $conn->query($sql);
-                if($result->num_rows > 1) {
-                  while($row = $result->fetch_assoc()) {
-                    include("product.php");
-                  }
-                } else {
-                  ?>
-                    <h3 class="text-center">Oops, There no products yet.</h3>
-                  <?php
+                while($row = $result->fetch_assoc()){
+                  include("product.php");
                 }
-                
-                
-
-            ?>
+              ?>
       </div>
     </div>
    

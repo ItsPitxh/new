@@ -1,37 +1,3 @@
-<!-- prod modal -->
-<div class="modal collapse" id="prod-modal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <h5>
-                    <!-- product name -->
-                    product |
-                    <a href="#">
-                        user
-                        <!-- user username -->
-                    </a>
-                </h5>
-                <a class="close" data-dismiss="modal">x</a>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col">
-                        <img src="images/400X200.gif" alt="">
-                    </div>
-                    <div class="col">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a data-toggle="modal" data-target="#chomodal" class="btn btn-success">Buy +</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- logout alert modal -->
 <div class="modal fade" id='logout-modal'>
     <div class="modal-dialog">
@@ -52,50 +18,12 @@
 </div>
 
 <!-- checkout modal -->
-<div class="modal fade" id="chomodal">
-    <form action="" class="form-modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4>Checkout</h4>
-                    <a href="#" data-toggle="modal" data-target="#chomodal" class="close" id="close">x</a>
-                </div>
-                <div class="modal-body">
-                    <div class="row mx-0">
-                        <div class="col pl-0">
-                            <label for="" class="d-block text-left">Name</label>
-                            <input type="text" name="" id="fname" class="form-control" value="<?=$_SESSION['user_fname']?>">
-                        </div>
-                        <div class="col pr-0">
-                            <label for="" class="d-block text-left">Last Name</label>
-                            <input type="text" name="" id="sname" class="form-control" value="<?=$_SESSION['user_lname']?>">
-                        </div>
-                    </div>
 
-                    <label for="" class="d-block text-left">Receiver's Address</label>
-                    <textarea id="address" name="" style="resize:none;" class="form-control mb-3" id="" cols="30" rows="5"><?=$_SESSION['user_home_address']?></textarea>
-
-                    <div>
-                        <label for="" class="float-left">Payment Verification</label>
-                        <label for="img1" class="display-img img-label">
-                            <h3>+</h3>
-                        </label>
-                        <input type="file" name="" class="img-input" id='img1' required hidden>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <a href="" class="btn btn-success">Confirm Checkout</a>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
 
 
 <!-- add product modal -->
 <div class="modal" id="add-prod-modal">
-  <form action='dbugfn.php' method="post" enctype='multipart/form-data' class="form-modal">
+  <form method="post" enctype='multipart/form-data' class="form-modal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -109,27 +37,17 @@
               <label for="prod-name" class="d-block">Product's Name</label>
               <input type="text" name="prod-name" id="prod-name" class="form-control" required>
             </div>
-            <div class="col-6 pl-0">
+            <div class="col-12 px-0">
               <label for="prod-price" class="d-block">Product's Price (Baht)</label>
               <input type="number" name="prod-price" id="" class="form-control" required>
             </div>
-            <div class="col-6 pr-0">
-                <label for="prod-price" class="d-block">Product's Category</label>
-                <select name="prod-cat" id="" class="form-control">
-                    <option value="1">Vegetables</option>
-                    <option value="2">Fruits</option>
-                    <option value="3">Chemicals</option>
-                    <option value="4">Tools</option>
-                    <option value="5">Agricultural-Vehicles</option>
-                    <option value="Others">Others...</option>
-                    
-                </select>
-            </div>
+            
             <div class="col-12 px-0">
                 <div class="input-group">
                     <label for="prod-amt">Product's Amout</label>
                     <input type="text" name="prod-amt" id="prod-amt" class="form-control w-75">
-                    <select name="prod-unit" id="prod-unit" class="form-control w-25">
+                    <select name="prod-unit" id="prod-unit" class="form-control w-25" required>
+                        <option value="">Please Select</option>
                         <option value="kilogram">kilogram</option>
                         <option value="kilometer">kilometer</option>
                         <option value="ton">ton</option>
@@ -157,8 +75,8 @@
                 </div>
         </div>
         <div class="modal-footer">
-          <input type="submit" name='' class="btn btn-success" value="Submit Product">
-          <!-- <input type="submit" name='add-prod-submit' class="btn btn-success" value="Submit Product"> -->
+          <!-- <input type="submit" name='' class="btn btn-success" value="Submit Product"> -->
+          <input type="submit" name='add-prod-submit' class="btn btn-success" value="Submit Product">
         </div>
       </div>
     </div>
@@ -204,6 +122,7 @@
     </div>
     </form>
 </div>
+
 
 
 

@@ -4,7 +4,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+  <head>  
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,75 +18,22 @@
       include("nav.php");
     ?>
     <div class="container mt-3">
-      <div class="row">
-        <div class="col-12">
-          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-              <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
-              <li data-target="#carouselExampleControls" data-slide-to="1"></li>
-              <li data-target="#carouselExampleControls" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img class="d-block w-100" src="images/1920x500.gif" alt="First slide">
-                <div class="carousel-caption d-none d-md-block">
-                  <a href="#" class="text-white" data-toggle="modal" data-target="#prod-modal"><h5>Item 1 Heading</h5></a>
-                  
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="images/1920x500.gif" alt="Second slide">
-                <div class="carousel-caption d-none d-md-block">
-                  <a href="#" class="text-white" data-toggle="modal" data-target="#prod-modal"><h5>Item 2 Heading</h5></a>
-
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="images/1920x500.gif" alt="Third slide">
-                <div class="carousel-caption d-none d-md-block">
-                  <a href="#" class="text-white" data-toggle="modal" data-target="#prod-modal"><h5>Item 3 Heading</h5></a>
-
-                </div>
-              </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-            </a>
-          </div>
+        <div class="row mx-0 text-center">
+                <?php
+                  $sql = "SELECT * FROM prod_tb INNER JOIN user_tb ON prod_tb.user_id = user_tb.user_id INNER JOIN prod_img_tb ON prod_tb.prod_id = prod_img_tb.prod_id GROUP BY prod_tb.prod_id";
+                  $result = $conn->query($sql);
+                  if($result->num_rows != 0) {
+                      while($row = $result->fetch_assoc()){
+                        include("product.php"); 
+                      }
+                  } else {
+                    ?>
+                      <h1>Lick A Ballsacks</h1>
+                    <?php
+                  }
+                ?>
         </div>
-      </div>
 
-    </div>
-    <hr>
-    <h2 class="text-center">RECOMMENDED PRODUCTS</h2>
-    <hr>
-    
-    <div class="container">
-      <div class="form-inline">
-        <form action="" method="post">
-          <select name="" class="form-control w-25 ml-auto">
-            <option value="">Sort By...</option>
-            <option value="">Name A-Z</option>
-            <option value="">Price Low-High</option>
-            <option value="">Date Added</option>
-          </select>
-          <input type="submit" class="btn ml-1" value='submit'>
-        </form>
-      </div>
-      <div class="row text-center">
-              <?php
-                $sql = "SELECT * FROM prod_tb";
-                $result = $conn->query($sql);
-                while($row = $result->num_rows){
-                  include("product.php");
-                }
-              ?>
-      </div>
     </div>
    
     <hr>

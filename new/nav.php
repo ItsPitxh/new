@@ -27,51 +27,39 @@
               </div>
             <?php
               if(empty($_SESSION['user_id'])) {
-                ?>
-                  <div class="dropdown dropdown-btn btn-dark rounded">
-                    <form action="" method="post">
+                  ?>
+                      <div class="dropdown dropdown-btn">
                         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Register / Log In</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item " href="register.php">Register</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item " href="login.php">Log In</a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item " href='login.php'>Log In</a>
+                            <div class="dropdown-divider"></div>
+                            <a class='dropdown-item' href="register.php">Register</a>
+                          </div>
                       </div>
-                    </form>
-                  </div>
-                          
-                          
-                <?php
+                  <?php
               } else {
                 if($_SESSION['user_status'] == "user" XOR $_SESSION['user_status'] == 'store') {
                   ?>
                     <div class="dropdown dropdown-btn">
-                      <form action="" method="post">
-                          <a class="nav-link dropdown-toggle text-white btn-dark rounded" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item " href="user.php?user=<?=$_SESSION['user_id']?>">User</a>
-                          <div class="dropdown-divider"></div>
-                          <a class='dropdown-item' data-toggle='modal' data-target='#logout-modal'>Log Out</a>
-                      </form>
-                            
-                            
-                        </div>
+                      <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item " href="user.php?user=<?=$_SESSION['user_id']?>">User</a>
+                        <div class="dropdown-divider"></div>
+                        <a class='dropdown-item' data-toggle='modal' data-target='#logout-modal'>Log Out</a>
+                      </div>
                     </div> 
                   <?php
 
                 } else {
                   ?>
-                      <div class="dropdown dropdown-btn">
-                      
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item " href="user.php?user=<?=$_SESSION['user_id']?>">User</a>
-                            <div class="dropdown-divider"></div>
-                            <a class='dropdown-item' data-toggle='modal' data-target='#logout-modal'>Log Out</a>
-      
-
-
-                          </div>
-                      </div> 
+                    <div class="dropdown dropdown-btn">
+                      <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item " href="user.php?user=<?=$_SESSION['user_id']?>">User</a>
+                          <div class="dropdown-divider"></div>
+                          <a class='dropdown-item' data-toggle='modal' data-target='#logout-modal'>Log Out</a>
+                        </div>
+                    </div> 
                   <?php
 
 

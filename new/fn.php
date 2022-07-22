@@ -66,72 +66,83 @@
 
       
     }
+
     //======================== Authorizaion Log In Execution ========================
-    if(isset($_POST['login-btn'])){
-      // session_start();
-      $username = $_POST['username'];
-      $password = $_POST['password'];
-      $sql = "SELECT * FROM user_tb WHERE user_username = '$username' AND user_password = '$password'";
-      $result = $conn->query($sql);
-      $row = $result->fetch_assoc();
-      if($result->num_rows != 0) {
-        $_SESSION['user_id'] = $row['user_id'];
-        $_SESSION['user_username'] = $row['user_username'];
-        $_SESSION['user_password'] = $row['user_password'];
-        $_SESSION['user_fname'] = $row['user_fname'];
-        $_SESSION['user_lname'] = $row['user_lname'];
-        $_SESSION['user_pfp'] = $row['user_pfp'];
-        $_SESSION['user_home_address'] = $row['user_home_address'];
-        $_SESSION['user_bank_acc'] = $row['user_bank_acc'];
-        $_SESSION['user_email'] = $row['user_email'];
-        $_SESSION['user_tel'] = $row['user_tel'];
-        $_SESSION['user_cit_id'] = $row['user_cit_id'];
-        $_SESSION['user_status'] = $row['user_status'];
-        
-        header("location:index.php");
-        exit();
-      } else {
-        session_destroy();
-        header('location:login.php?err=1');
-        exit();
-      }
-    }
+if(isset($_POST['login-btn'])){
+  // session_start();
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+  $sql = "SELECT * FROM user_tb WHERE user_username = '$username' AND user_password = '$password'";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+  if($result->num_rows != 0) {
+    $_SESSION['user_id'] = $row['user_id'];
+    $_SESSION['user_username'] = $row['user_username'];
+    $_SESSION['user_password'] = $row['user_password'];
+    $_SESSION['user_fname'] = $row['user_fname'];
+    $_SESSION['user_lname'] = $row['user_lname'];
+    $_SESSION['user_pfp'] = $row['user_pfp'];
+    $_SESSION['user_home_address'] = $row['user_home_address'];
+    $_SESSION['user_bank_acc'] = $row['user_bank_acc'];
+    $_SESSION['user_email'] = $row['user_email'];
+    $_SESSION['user_tel'] = $row['user_tel'];
+    $_SESSION['user_cit_id'] = $row['user_cit_id'];
+    $_SESSION['user_status'] = $row['user_status'];
+    
+    header("location:index.php");
+    exit();
+  } else {
+    session_destroy();
+    header('location:login.php?err=1');
+    exit();
+  }
+}
+
 
 //======================== Add Product Execution ========================
 if(isset($_POST['add-prod-submit'])) {
   $user_id = $_SESSION['user_id'];
   $name = $_POST['prod-name'];
   $price = $_POST['prod-price'];
-  $prod_amt = $_POST['prod-amt'];
-  $prod_unit = $_POST['prod-unit'];
+  $prod_cat = $_POST['prod-cat'];
+  $prod_amt = $_POST['prod-amt'].' '.$_POST['prod-unit'];
   $prod_des = $_POST['prod-des'];
   
 
-  $sql = "INSERT INTO `prod_tb`(`prod_name`, `prod_des`, `prod_cat_id`, `prod_amt`, `prod_unit`, `prod_price`, `prod_status`, `user_id`) VALUES ('$name','$prod_des','','$prod_amt','$prod_unit','$price','in-stock','$user_id')";
+  $sql = "INSERT INTO `prod_tb` (`prod_name`, `prod_des`, `prod_amt`, `prod_price`, `prod_status`, `user_id`) VALUES ('$name','$prod_des','$prod_amt','$price','in-stock','$user_id')";
   $conn->query($sql);
+  $sql = "SELECT `prod_id` FROM `prod_tb` ORDER BY `prod_id` DESC";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+  $prod_id = $row['prod_id'];
   
-  $fileCount = count($_FILES['prodimg']['name']);
   
-  if(isset($_FILES['prodimg']['size'])) {
-  for($i=0;$i<$fileCount;$i++) {
-      // $img = $_FILES['prodimg']['name'][$i]
-      $img = uniqid().'.'.pathinfo($_FILES['prodimg']['name'][$i],PATHINFO_EXTENSION);
-      move_uploaded_file($_FILES['prodimg']['tmp_name'][$i],"images/prodimg/".$img);
+
+  $fileCount = count($_FILES['prodimg']['size']);
+  if(isset($_FILES['prodimg'])) {
+    for($i=0;$i<$fileCount;$i++) {
+      if($_FILES['prodimg']['size'][$i] > 0) {
+        $img = $_FILES['prodimg']['name'][$i];
+        $img = uniqid().'.'.pathinfo($_FILES['prodimg']['name'][$i],PATHINFO_EXTENSION);
+        move_uploaded_file($_FILES['prodimg']['tmp_name'][$i],"images/prodimg/".$img);
+        $sql = "INSERT INTO `prod_img_tb` (`img_name`, `prod_id`) VALUES ('$img','$prod_id')";
+        $conn->query($sql);
+
+      }
     }
   }
-  
   header("location: user.php?user=$user_id");
-  exit;
+  exit();
 }    
 
 
     
-    //======================== Logout Execution ========================
-    if(isset($_REQUEST['logoutfn'])) {
-      session_unset();
-      header("location:index.php");
-      exit;
-    }
+//======================== Logout Execution ========================
+if(isset($_REQUEST['logoutfn'])) {
+  session_unset();
+  header("location:index.php");
+  exit;
+}
 
 //======================== Calling Store Registeration Function ========================
   if(isset($_POST['store-regis'])) {
@@ -155,5 +166,9 @@ if(isset($_POST['add-prod-submit'])) {
   }
     
 
+
+  // if(isset($_POST['checkout-submit'])) {
+    
+  // }
 
 ?>
